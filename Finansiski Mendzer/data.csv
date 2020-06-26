@@ -1,0 +1,18 @@
+0,0,0
+Categories:
+1,Dad
+1,Grandma
+1,Last Month
+1,Other
+0,Rent
+0,Bills
+0,Groceries
+0,Personal
+0,Food
+0,Transportation
+0,Other
+Accounts:
+Cash,Cash,0
+Debit Card,Card,0
+Transactions:
+1,01.1.0001 00:00:00,Cash,Dad,100,glup,jazik
