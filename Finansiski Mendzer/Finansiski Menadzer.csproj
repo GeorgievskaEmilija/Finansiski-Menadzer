@@ -66,7 +66,6 @@
     <Compile Include="AddTransaction.Designer.cs">
       <DependentUpon>AddTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="BadTransactionException.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="EditAccount.cs">
@@ -74,6 +73,18 @@
     </Compile>
     <Compile Include="EditAccount.Designer.cs">
       <DependentUpon>EditAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCategories.Designer.cs">
+      <DependentUpon>EditCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditCategory.Designer.cs">
+      <DependentUpon>EditCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="EditTransaction.cs">
       <SubType>Form</SubType>
@@ -118,6 +129,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditAccount.resx">
       <DependentUpon>EditAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCategories.resx">
+      <DependentUpon>EditCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCategory.resx">
+      <DependentUpon>EditCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditTransaction.resx">
       <DependentUpon>EditTransaction.cs</DependentUpon>

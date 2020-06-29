@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Finansiski_Mendzer
+﻿namespace Finansiski_Mendzer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
     public partial class AccountsForm : Form
     {
+        //Форма каде корисникот може детално да ги разгледа објектите од класата Account и да манипулира со нив.
         public AccountsForm()
         {
             InitializeComponent();
@@ -19,33 +14,36 @@ namespace Finansiski_Mendzer
 
         private void AccountsForm_Load(object sender, EventArgs e)
         {
-            UpdateValues();
+            Program.Data.WriteAndUpdate();
         }
 
         private void transactionsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.TransactionForm.Show();
         }
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Program.StatisticsForm.createChart(0);
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.StatisticsForm.Show();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.SettingsFrom.Show();
         }
 
         public void UpdateValues()
         {
+            //Ја ажурира формата со податоците кои се наоѓаат во Data.
             accountsListBox.Items.Clear();
-            var accounts = Program.Data.Accounts.Values.ToList();
-            foreach (var item in accounts)
+            List<Account> accounts = Program.Data.Accounts.Values.ToList();
+            foreach (Account item in accounts)
             {
                 string text = item.Name;
                 accountsListBox.Items.Add(text);
@@ -87,28 +85,31 @@ namespace Finansiski_Mendzer
                 if (dialogResult == DialogResult.Yes)
                 {
                     Program.Data.Accounts.Remove(account);
-                    Program.Data.UpdateValues();
-                    this.UpdateValues();
-                    //da gi izbrisham site transakci od ovaj account
-                    /*foreach (var item in Program.Data.Transactions)
+                    Program.Data.WriteAndUpdate();
+                    List<Transaction> newTransactionList = new List<Transaction>();
+                    foreach (Transaction item in Program.Data.Transactions)
                     {
-                        if (item.Account.Name.Equals(account))
+                        if (!item.Account.Name.Equals(account))
                         {
-                            Program.Data.Transactions.Remove(item);
+                            newTransactionList.Add(Program.Data.Transactions.ElementAt(Program.Data.Transactions.IndexOf(item)));
                         }
-                    }*/
-                    Program.TransactionForm.UpdateValues();
-                }
-                else if (DialogResult == DialogResult.No)
-                {
-
+                    }
+                    Program.Data.Transactions = newTransactionList;
+                    Program.Data.WriteAndUpdate();
                 }
             }
         }
+
         private void accountsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.AccountsForm.Show();
+        }
+
+        private void AccountsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -119,6 +119,7 @@
             this.Controls.Add(this.groupLabel);
             this.Name = "AddAccount";
             this.Text = "AddAccount";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddAccount_FormClosing);
             this.Load += new System.EventHandler(this.AddAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

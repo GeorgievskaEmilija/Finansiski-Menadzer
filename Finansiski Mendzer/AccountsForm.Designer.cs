@@ -146,6 +146,7 @@ namespace Finansiski_Mendzer
             this.Controls.Add(this.transactionsButton);
             this.Name = "AccountsForm";
             this.Text = "AccountsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountsForm_FormClosing);
             this.Load += new System.EventHandler(this.AccountsForm_Load);
             this.ResumeLayout(false);
 

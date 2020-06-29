@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Finansiski_Mendzer
+﻿namespace Finansiski_Mendzer
 {
-    class IncomeCategory : Category
+    internal class IncomeCategory : Category
     {
+        //Класа која претставува приходна категорија.
+
         public IncomeCategory(string name) : base(name)
         {
         }

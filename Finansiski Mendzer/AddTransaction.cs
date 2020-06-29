@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
-
-    //treba da se naprat proverki pri kreiranje
     public partial class AddTransaction : Form
     {
+        //Форма каде корисникот креира нов Transaction објект и го додава во Data објектот.
+
         public Transaction Transaction { get; set; }
+
         public AddTransaction()
         {
             InitializeComponent();
@@ -22,7 +16,7 @@ namespace Finansiski_Mendzer
 
         private void AddTransaction_Load(object sender, EventArgs e)
         {
-            foreach (String s in Program.Data.Accounts.Keys)
+            foreach (string s in Program.Data.Accounts.Keys)
             {
                 accountComboBox.Items.Add(Program.Data.Accounts[s]);
             }
@@ -36,9 +30,9 @@ namespace Finansiski_Mendzer
                 foreach (string s in Program.Data.IncomeCategories.Keys)
                 {
                     categoryComboBox.Items.Add(Program.Data.IncomeCategories[s]);
-                }                
+                }
             }
-            else if(transactionType.Equals("Expenses"))
+            else if (transactionType.Equals("Expenses"))
             {
                 foreach (string s in Program.Data.ExpensesCategories.Keys)
                 {
@@ -64,7 +58,7 @@ namespace Finansiski_Mendzer
             if (!ValidateData())
             {
                 AddingTransaction();
-                this.Close();
+                Close();
                 Program.TransactionForm.Show();
             }
         }
@@ -74,7 +68,7 @@ namespace Finansiski_Mendzer
             if (!ValidateData())
             {
                 AddingTransaction();
-                this.Hide();
+                Hide();
                 AddTransaction addTransaction = new AddTransaction();
                 addTransaction.Show();
             }
@@ -99,23 +93,20 @@ namespace Finansiski_Mendzer
             if (incomeRadioButton.Checked)
             {
                 Transaction = new IncomeTransaction(dateTime, account, category, amount, contents);
-                Transaction.MakeTransaction();
             }
             else
             {
-                //Ova treba da se prepraj ne mi teknuva sega kako
                 Transaction = new ExpenseTransaction(dateTime, account, category, amount, contents);
-                try
-                {
-                    Transaction.MakeTransaction();
-                }
-                catch (BadTransactionException)
-                {
-                    MessageBox.Show("This asset's amount is not possible to be less than zero!");
-                }
             }
-            Program.Data.AddTransaction(Transaction);
-            Program.TransactionForm.UpdateValues();
+            if (Transaction.MakeTransaction())
+            {
+                Program.Data.AddTransaction(Transaction);
+                Program.Data.WriteAndUpdate();
+            }
+            else
+            {
+                MessageBox.Show("This asset's amount is not possible to be less than zero!");
+            }
         }
 
         private bool ValidateData()
@@ -131,6 +122,11 @@ namespace Finansiski_Mendzer
                 return true;
             }
             return false;
+        }
+
+        private void AddTransaction_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.TransactionForm.Show();
         }
     }
 }

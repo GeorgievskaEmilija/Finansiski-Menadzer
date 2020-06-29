@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
     public partial class SettingsFrom : Form
     {
+        //Форма каде корисникот може да манипулира со поставките.
+
         public string currency;
         public SettingsFrom()
         {
@@ -25,26 +21,29 @@ namespace Finansiski_Mendzer
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Program.StatisticsForm.createChart(0);
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.StatisticsForm.Show();
         }
 
         private void accountsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.AccountsForm.Show();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.SettingsFrom.Show();
         }
 
         private void transactionsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
+            Program.Data.WriteAndUpdate();
             Program.TransactionForm.Show();
         }
 
@@ -91,6 +90,45 @@ namespace Finansiski_Mendzer
         private void currencyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             currency = currencyComboBox.SelectedItem.ToString().Substring(0, 3);
+        }
+
+        private void editIncomeButton_Click(object sender, EventArgs e)
+        {
+            EditCategories editCategories = new EditCategories
+            {
+                categoriesType = true
+            };
+            editCategories.LoadValues();
+            editCategories.Show();
+            Hide();
+        }
+
+        private void SettingsFrom_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void editExpenseButton_Click(object sender, EventArgs e)
+        {
+            EditCategories editCategories = new EditCategories
+            {
+                categoriesType = false
+            };
+            editCategories.LoadValues();
+            editCategories.Show();
+            Hide();
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to delete all data?", "Delete data", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                File.Delete(Program.Data.FilePath);
+                Program.Data = new Data();
+                MessageBox.Show("Data successfully deleted! The application will restart!");
+                Application.Restart();
+            }
         }
     }
 }

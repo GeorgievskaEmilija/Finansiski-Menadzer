@@ -39,8 +39,9 @@
             this.statisticsButton = new System.Windows.Forms.Button();
             this.accountsButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.daysListBox = new System.Windows.Forms.ListBox();
+            this.typesListBox = new System.Windows.Forms.ListBox();
             this.transactionsListBox = new System.Windows.Forms.ListBox();
+            this.typeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // incomeTextLabel
@@ -171,34 +172,46 @@
             this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
-            // daysListBox
+            // typesListBox
             // 
-            this.daysListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
-            this.daysListBox.FormattingEnabled = true;
-            this.daysListBox.ItemHeight = 25;
-            this.daysListBox.Location = new System.Drawing.Point(20, 80);
-            this.daysListBox.Name = "daysListBox";
-            this.daysListBox.Size = new System.Drawing.Size(360, 504);
-            this.daysListBox.TabIndex = 11;
+            this.typesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
+            this.typesListBox.FormattingEnabled = true;
+            this.typesListBox.ItemHeight = 25;
+            this.typesListBox.Location = new System.Drawing.Point(20, 130);
+            this.typesListBox.Name = "typesListBox";
+            this.typesListBox.Size = new System.Drawing.Size(360, 454);
+            this.typesListBox.TabIndex = 11;
+            this.typesListBox.SelectedIndexChanged += new System.EventHandler(this.typesListBox_SelectedIndexChanged);
             // 
             // transactionsListBox
             // 
             this.transactionsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
             this.transactionsListBox.FormattingEnabled = true;
             this.transactionsListBox.ItemHeight = 25;
-            this.transactionsListBox.Location = new System.Drawing.Point(400, 80);
+            this.transactionsListBox.Location = new System.Drawing.Point(400, 130);
             this.transactionsListBox.Name = "transactionsListBox";
-            this.transactionsListBox.Size = new System.Drawing.Size(360, 504);
+            this.transactionsListBox.Size = new System.Drawing.Size(360, 454);
             this.transactionsListBox.TabIndex = 12;
             this.transactionsListBox.DoubleClick += new System.EventHandler(this.transactionsListBox_DoubleClick);
+            // 
+            // typeComboBox
+            // 
+            this.typeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.14F);
+            this.typeComboBox.FormattingEnabled = true;
+            this.typeComboBox.Location = new System.Drawing.Point(571, 80);
+            this.typeComboBox.Name = "typeComboBox";
+            this.typeComboBox.Size = new System.Drawing.Size(189, 37);
+            this.typeComboBox.TabIndex = 22;
+            this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.typeComboBox_SelectedIndexChanged);
             // 
             // TransactionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 753);
+            this.Controls.Add(this.typeComboBox);
             this.Controls.Add(this.transactionsListBox);
-            this.Controls.Add(this.daysListBox);
+            this.Controls.Add(this.typesListBox);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.accountsButton);
             this.Controls.Add(this.statisticsButton);
@@ -231,7 +244,8 @@
         private System.Windows.Forms.Button statisticsButton;
         private System.Windows.Forms.Button accountsButton;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.ListBox daysListBox;
+        private System.Windows.Forms.ListBox typesListBox;
         private System.Windows.Forms.ListBox transactionsListBox;
+        private System.Windows.Forms.ComboBox typeComboBox;
     }
 }

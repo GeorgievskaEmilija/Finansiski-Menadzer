@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Finansiski_Mendzer
+﻿namespace Finansiski_Mendzer
 {
     public class Group
     {
+        //Класа која претставува група од која може да се креира еден Account објект.
+
         public Group(string name)
         {
             Name = name;

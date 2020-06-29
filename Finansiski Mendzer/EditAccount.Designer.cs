@@ -119,6 +119,7 @@
             this.Controls.Add(this.groupLabel);
             this.Name = "EditAccount";
             this.Text = "EditAccount";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditAccount_FormClosing);
             this.Load += new System.EventHandler(this.EditAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

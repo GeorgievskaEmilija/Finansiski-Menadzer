@@ -1,0 +1,10 @@
+1200,0,1200
+Categories:
+1,Income
+0,Expenses
+Accounts:
+Cash,Cash,0
+Transactions:
+1,29.6.2020 04:28:53,Cash,Income,500,
+1,26.6.2020 05:05:56,Cash,Income,500,
+1,29.6.2020 05:06:10,Cash,Income,200,

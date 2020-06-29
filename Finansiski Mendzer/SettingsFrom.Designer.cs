@@ -47,6 +47,8 @@
             this.backupLabel = new System.Windows.Forms.Label();
             this.csvLabel = new System.Windows.Forms.Label();
             this.csvButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.deleteLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // settingsButton
@@ -146,6 +148,7 @@
             this.editIncomeButton.TabIndex = 23;
             this.editIncomeButton.Text = "Edit";
             this.editIncomeButton.UseVisualStyleBackColor = true;
+            this.editIncomeButton.Click += new System.EventHandler(this.editIncomeButton_Click);
             // 
             // editExpenseButton
             // 
@@ -156,6 +159,7 @@
             this.editExpenseButton.TabIndex = 27;
             this.editExpenseButton.Text = "Edit";
             this.editExpenseButton.UseVisualStyleBackColor = true;
+            this.editExpenseButton.Click += new System.EventHandler(this.editExpenseButton_Click);
             // 
             // expenseAddButton
             // 
@@ -249,11 +253,34 @@
             this.csvButton.UseVisualStyleBackColor = true;
             this.csvButton.Click += new System.EventHandler(this.csvButton_Click);
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
+            this.deleteButton.Location = new System.Drawing.Point(325, 451);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(445, 34);
+            this.deleteButton.TabIndex = 36;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // deleteLabel
+            // 
+            this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.14F);
+            this.deleteLabel.Location = new System.Drawing.Point(13, 453);
+            this.deleteLabel.Name = "deleteLabel";
+            this.deleteLabel.Size = new System.Drawing.Size(178, 29);
+            this.deleteLabel.TabIndex = 35;
+            this.deleteLabel.Text = "Delete All Data:";
+            // 
             // SettingsFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 753);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.csvButton);
             this.Controls.Add(this.csvLabel);
             this.Controls.Add(this.backupLabel);
@@ -275,6 +302,7 @@
             this.Controls.Add(this.transactionsButton);
             this.Name = "SettingsFrom";
             this.Text = "SettingsFrom";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsFrom_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +329,7 @@
         private System.Windows.Forms.Label backupLabel;
         private System.Windows.Forms.Label csvLabel;
         private System.Windows.Forms.Button csvButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Label deleteLabel;
     }
 }

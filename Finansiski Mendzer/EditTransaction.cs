@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
     public partial class EditTransaction : Form
     {
+
+        //Форма каде се манипулира со веќе постоечки објект од класата Transaction.
+
         public Transaction Transaction { get; set; }
+
         public EditTransaction()
         {
             InitializeComponent();
@@ -53,7 +50,7 @@ namespace Finansiski_Mendzer
             if (!ValidateData())
             {
                 AddingTransaction();
-                this.Close();
+                Close();
                 Program.TransactionForm.Show();
             }
         }
@@ -77,23 +74,20 @@ namespace Finansiski_Mendzer
             if (incomeRadioButton.Checked)
             {
                 Transaction = new IncomeTransaction(dateTime, account, category, amount, contents);
-                Transaction.MakeTransaction();
             }
             else
             {
-                //Ova treba da se prepraj ne mi teknuva sega kako
                 Transaction = new ExpenseTransaction(dateTime, account, category, amount, contents);
-                try
-                {
-                    Transaction.MakeTransaction();
-                }
-                catch (BadTransactionException)
-                {
-                    MessageBox.Show("This asset's amount is not possible to be less than zero!");
-                }
             }
-            Program.Data.AddTransaction(Transaction);
-            Program.TransactionForm.UpdateValues();
+            if (Transaction.MakeTransaction())
+            {
+                Program.Data.AddTransaction(Transaction);
+                Program.Data.WriteAndUpdate();
+            }
+            else
+            {
+                MessageBox.Show("This asset's amount is not possible to be less than zero!");
+            }
         }
 
         private bool ValidateData()
@@ -136,15 +130,19 @@ namespace Finansiski_Mendzer
             DialogResult dialogResult = MessageBox.Show("Do you want to delete this transaction?", "Delete transaction", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                this.Close();
+                Close();
                 Program.TransactionForm.Show();
-                Program.Data.UpdateValues();
-                Program.TransactionForm.UpdateValues();
+                Program.Data.WriteAndUpdate();
             }
             else if (DialogResult == DialogResult.No)
             {
 
             }
+        }
+
+        private void EditTransaction_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.TransactionForm.Show();
         }
     }
 }

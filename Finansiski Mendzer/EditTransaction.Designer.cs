@@ -219,6 +219,7 @@
             this.Controls.Add(this.dateLabel);
             this.Name = "EditTransaction";
             this.Text = "EditTransaction";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditTransaction_FormClosing);
             this.Load += new System.EventHandler(this.EditTransaction_Load);
             this.transactionGroupBox.ResumeLayout(false);
             this.transactionGroupBox.PerformLayout();

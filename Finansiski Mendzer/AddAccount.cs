@@ -12,7 +12,10 @@ namespace Finansiski_Mendzer
 {
     public partial class AddAccount : Form
     {
+        //Форма каде корисникот може да додаде нов Account објект во Data објектот.
+
         Account account;
+
         public AddAccount()
         {
             InitializeComponent();
@@ -24,7 +27,7 @@ namespace Finansiski_Mendzer
             {
                 AddingAccount();
             }
-            
+
         }
 
         private void AddingAccount()
@@ -44,7 +47,7 @@ namespace Finansiski_Mendzer
             account = new Account(group, name, amount);
             Program.Data.Accounts.Add(account.ToString(), account);
             Program.AccountsForm.Show();
-            Program.AccountsForm.UpdateValues();
+            Program.Data.WriteAndUpdate();
             this.Close();
         }
 
@@ -69,6 +72,11 @@ namespace Finansiski_Mendzer
                 return true;
             }
             return false;
+        }
+
+        private void AddAccount_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.AccountsForm.Show();
         }
     }
 }

@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
     public partial class EditAccount : Form
     {
+        //Форма каде се манипулира со веќе постоечки објект од класата Account
+
         public Account account;
         public EditAccount()
         {
@@ -44,8 +39,8 @@ namespace Finansiski_Mendzer
             account = new Account(group, name, amount);
             Program.Data.Accounts.Add(account.ToString(), account);
             Program.AccountsForm.Show();
-            Program.AccountsForm.UpdateValues();
-            this.Close();
+            Program.Data.WriteAndUpdate();
+            Close();
         }
 
         private void AddAccount_Load(object sender, EventArgs e)
@@ -77,6 +72,11 @@ namespace Finansiski_Mendzer
             groupComboBox.SelectedItem = account.Group;
             nameTextBox.Text = account.Name;
             amountTextBox.Text = account.Amount.ToString();
+        }
+
+        private void EditAccount_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.AccountsForm.Show();
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Finansiski_Mendzer
+﻿namespace Finansiski_Mendzer
 {
-    class ExpensesCategory : Category
+    internal class ExpensesCategory : Category
     {
+        //Класа која претставува потрошувачка категорија.
+
         public ExpensesCategory(string name) : base(name)
         {
         }

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
     public class Data
     {
+        //Објект Data во кој се чуваат сите податоци кои корисникот ги внесува
+
         public decimal Income { get; set; }
         public decimal Expenses { get; set; }
         public decimal Total { get; set; }
@@ -26,33 +22,21 @@ namespace Finansiski_Mendzer
             Income = 0;
             Expenses = 0;
             Total = 0;
-            Groups = new Dictionary<string, Group>();
-            Groups.Add("Accounts", new Group("Accounts"));
-            Groups.Add("Cash", new Group("Cash"));
-            Groups.Add("Card", new Group("Card"));
-            Groups.Add("Debit Card", new Group("Debit Card"));
-            Groups.Add("Savings", new Group("Savings"));
-            Groups.Add("Investments", new Group("Investments"));
-            Groups.Add("Loan", new Group("Loan"));
-            Groups.Add("Insurance", new Group("Insurance"));
+            Groups = new Dictionary<string, Group>
+            {
+                { "Accounts", new Group("Accounts") },
+                { "Cash", new Group("Cash") },
+                { "Card", new Group("Card") },
+                { "Debit Card", new Group("Debit Card") },
+                { "Savings", new Group("Savings") },
+                { "Investments", new Group("Investments") },
+                { "Loan", new Group("Loan") },
+                { "Insurance", new Group("Insurance") }
+            };
             Transactions = new List<Transaction>();
             Accounts = new Dictionary<string, Account>();
             IncomeCategories = new Dictionary<string, Category>();
             ExpensesCategories = new Dictionary<string, Category>();
- /*IncomeCategories.Add("Dad", new IncomeCategory("Dad"));
-IncomeCategories.Add("Grandma", new IncomeCategory("Grandma"));
-IncomeCategories.Add("Last Month", new IncomeCategory("Last Month"));
-IncomeCategories.Add("Other", new IncomeCategory("Other"));
-ExpensesCategories.Add("Rent", new ExpensesCategory("Rent"));
-ExpensesCategories.Add("Bills", new ExpensesCategory("Bills"));
-ExpensesCategories.Add("Groceries", new ExpensesCategory("Groceries"));
-ExpensesCategories.Add("Personal", new ExpensesCategory("Personal"));
-ExpensesCategories.Add("Food", new ExpensesCategory("Food"));
-ExpensesCategories.Add("Transportation", new ExpensesCategory("Transportation"));
-ExpensesCategories.Add("Other", new ExpensesCategory("Other"));
-Accounts.Add("Cash", new Account(Groups["Cash"], "Cash", 0));
-Accounts.Add("Card", new Account(Groups["Debit Card"], "Card", 0));
-Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeCategories["Dad"], 100, "glup,jazik"));*/
             FilePath = Path.GetDirectoryName(Directory.GetCurrentDirectory());
             FilePath = FilePath.Substring(0, FilePath.Length - 3) + "data.csv";
             if (!File.Exists(FilePath))
@@ -61,7 +45,6 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
             }
             else
             {
-                //File.WriteAllText(FilePath, ToCSV());
                 GetFromCSV(FilePath);
             }
         }
@@ -75,6 +58,7 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
 
         public void UpdateValues()
         {
+            //Ги ажурира вредностите во објектот.
             Income = 0;
             Expenses = 0;
             Total = 0;
@@ -94,6 +78,7 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
 
         public string ToCSV()
         {
+            //Враќа стринг објект од сите податоци во овој објект.
             string Result = "";
             Result += string.Format("{0},{1},{2}\n", Income, Expenses, Total);
             Result += string.Format("Categories:\n");
@@ -120,11 +105,16 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
 
         public void GetFromCSV(string path)
         {
+            //Чита податоци од csv фајл и запишува во овој објект.
             using (StreamReader file = new StreamReader(path))
             {
                 string type = "";
                 string line;
                 line = file.ReadLine();
+                if (line == null)
+                {
+                    return;
+                }
                 string[] parts = line.Split(',');
                 Income = Convert.ToDecimal(parts[0]);
                 Expenses = Convert.ToDecimal(parts[1]);
@@ -173,9 +163,12 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
 
         public void WriteAndUpdate()
         {
-            //ova ke go napram pokasno
-            ToCSV();
-            //GetFromCSV();
+            //Ги запишува моменталните вредности во csv фајлот и ги ажурира вредностите во целата форма.
+            File.WriteAllText(FilePath, ToCSV());
+            Program.TransactionForm.UpdateValues();
+            Program.StatisticsForm.createChart(0);
+            Program.AccountsForm.UpdateValues();
+            UpdateValues();
         }
 
         public Account MakeAccount(string csvLine)
@@ -236,6 +229,7 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
 
         public bool saveToDesktop()
         {
+            //Прави копија на csv фајлот на десктоп.
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string finalPath = System.IO.Path.Combine(desktopPath, "data.csv");
             try
@@ -246,7 +240,7 @@ Transactions.Add(new IncomeTransaction(new DateTime(), Accounts["Cash"], IncomeC
             {
                 string text = e.Message;
                 return false;
-                
+
             }
             return true;
         }

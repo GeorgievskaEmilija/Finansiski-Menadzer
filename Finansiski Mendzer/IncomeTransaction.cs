@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Finansiski_Mendzer
 {
     public class IncomeTransaction : Transaction
     {
+        //Класа која претставува приходна трансакција.
+
         public IncomeTransaction(DateTime date, Account account, Category category) : base(date, account, category)
         {
         }
@@ -18,9 +16,10 @@ namespace Finansiski_Mendzer
 
         public IncomeTransaction() : base() { }
 
-        public override void MakeTransaction()
+        public override bool MakeTransaction()
         {
             Account.Amount += Amount;
+            return true;
         }
 
         public override string ToCSV()

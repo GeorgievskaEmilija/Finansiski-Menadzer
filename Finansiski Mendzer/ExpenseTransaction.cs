@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Finansiski_Mendzer
 {
     public class ExpenseTransaction : Transaction
     {
+        //Класа која претставува потрошувачка трансакција.
+
         public ExpenseTransaction(DateTime date, Account account, Category category) : base(date, account, category)
         {
         }
@@ -22,15 +20,16 @@ namespace Finansiski_Mendzer
             string Result = string.Format("0,{0},{1},{2},{3},{4}\n", Date, Account, Category, Amount, Contents);
             return Result;
         }
-        public override void MakeTransaction() 
+        public override bool MakeTransaction()
         {
             if (Account.Amount - Amount < 0 && !Account.Group.Equals("Card"))
             {
-                throw new BadTransactionException();
+                return false;
             }
             else
             {
                 Account.Amount -= Amount;
+                return true;
             }
         }
     }

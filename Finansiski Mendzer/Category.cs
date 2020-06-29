@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Finansiski_Mendzer
 {
     public abstract class Category
     {
+        //Абстрактна класа Category од која се наследени IncomeCategory и ExpensesCategory
         public string Name { get; set; }
 
-        public Category (string name)
+        public Category(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public override string ToString()
@@ -20,24 +17,7 @@ namespace Finansiski_Mendzer
             return Name;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is Category)
-            {
-                Category c = (Category)obj;
-                return this.Name.Equals(c.Name);
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
-        }
-
+        //Го враќа објектот во csv формат.
         public abstract string ToCSV();
     }
 }
