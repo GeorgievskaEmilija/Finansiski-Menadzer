@@ -129,7 +129,7 @@ Oваа функција работи на следниот начин:
 
 
 - Функцијата **UpdateValues()** ги ажурира вредностите во објектот, односно се грижи за делот најгоре на следната слика (Income, Expenses, Total) , и тоа го прави така што ги изминува сите трансакции, и за секоја трансакција, проверува , ако е трошок го зголемува Expenses со сумата на трансакцијата, и ако е прилив соодветно го зголемува Income.
-![alt code3](https://github.com/dimitar-papalazov/Finansiski-Menadzer/blob/master/Finansiski%20Mendzer/img/8.jpg) 
+![alt code3](https://github.com/dimitar-papalazov/Finansiski-Menadzer/blob/master/Finansiski%20Mendzer/img/last.jpg) 
 
 
 - Функцијата **createChart()** креира пита графикон, според трансакциите, од каков тип е и за кои трансакции.
