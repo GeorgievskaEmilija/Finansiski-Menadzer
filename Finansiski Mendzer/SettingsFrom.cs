@@ -130,5 +130,12 @@ namespace Finansiski_Mendzer
                 Application.Restart();
             }
         }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("For correctly and best working application, please do this next steps:\n"
+                    + "1. Go in Accounts Form and add one or more desired accounts.\n"
+                    + "2. Go in Settings Form and add one or more desired income and expense categories.\n");
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Finansiski_Mendzer
         //Форма каде се манипулира со веќе постоечки објект од класата Account
 
         public Account account;
+        private string oldName;
         public EditAccount()
         {
             InitializeComponent();
@@ -37,6 +38,14 @@ namespace Finansiski_Mendzer
                 amount = 0;
             }
             account = new Account(group, name, amount);
+            foreach (var item in Program.Data.Transactions)
+            {
+                if (item.Account.Name.Equals(oldName))
+                {
+                    item.Account = account;
+                }
+            }
+            Program.Data.Accounts.Remove(oldName);
             Program.Data.Accounts.Add(account.ToString(), account);
             Program.AccountsForm.Show();
             Program.Data.WriteAndUpdate();
@@ -72,6 +81,7 @@ namespace Finansiski_Mendzer
             groupComboBox.SelectedItem = account.Group;
             nameTextBox.Text = account.Name;
             amountTextBox.Text = account.Amount.ToString();
+            oldName = account.Name;
         }
 
         private void EditAccount_FormClosing(object sender, FormClosingEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
 {
@@ -17,6 +18,7 @@ namespace Finansiski_Mendzer
         public Dictionary<string, Category> ExpensesCategories { get; set; }
         public Dictionary<string, Group> Groups { get; set; }
         public string FilePath { get; set; }
+        public bool firstTimeUsing;
         public Data()
         {
             Income = 0;
@@ -41,17 +43,20 @@ namespace Finansiski_Mendzer
             FilePath = FilePath.Substring(0, FilePath.Length - 3) + "data.csv";
             if (!File.Exists(FilePath))
             {
-                File.Create(FilePath);
+                using (File.Create(FilePath));
+                firstTimeUsing = true;
             }
             else
             {
                 GetFromCSV(FilePath);
+                firstTimeUsing = false;
             }
         }
 
 
         public void AddTransaction(Transaction transaction)
         {
+            //Се додава трансакција, се користи во формите EditTransaction и AddTransaction
             Transactions.Add(transaction);
             UpdateValues();
         }
@@ -236,11 +241,9 @@ namespace Finansiski_Mendzer
             {
                 System.IO.File.Copy(FilePath, finalPath, true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                string text = e.Message;
                 return false;
-
             }
             return true;
         }

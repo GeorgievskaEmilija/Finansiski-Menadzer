@@ -49,6 +49,7 @@
             this.csvButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.deleteLabel = new System.Windows.Forms.Label();
+            this.helpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // settingsButton
@@ -274,11 +275,23 @@
             this.deleteLabel.TabIndex = 35;
             this.deleteLabel.Text = "Delete All Data:";
             // 
+            // helpButton
+            // 
+            this.helpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.12F);
+            this.helpButton.Location = new System.Drawing.Point(676, 571);
+            this.helpButton.Name = "helpButton";
+            this.helpButton.Size = new System.Drawing.Size(94, 34);
+            this.helpButton.TabIndex = 37;
+            this.helpButton.Text = "Help";
+            this.helpButton.UseVisualStyleBackColor = true;
+            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+            // 
             // SettingsFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 753);
+            this.Controls.Add(this.helpButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.csvButton);
@@ -331,5 +344,6 @@
         private System.Windows.Forms.Button csvButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Label deleteLabel;
+        private System.Windows.Forms.Button helpButton;
     }
 }

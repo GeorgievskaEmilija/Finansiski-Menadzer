@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Finansiski_Mendzer
@@ -105,7 +106,6 @@ namespace Finansiski_Mendzer
             {
                 typesListBox.SelectedIndex = 0;
                 LoadTransactions();
-
             }
         }
 

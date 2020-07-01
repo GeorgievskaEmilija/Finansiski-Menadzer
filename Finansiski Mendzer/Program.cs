@@ -20,7 +20,15 @@ namespace Finansiski_Mendzer
             StatisticsForm = new StatisticsForm();
             AccountsForm = new AccountsForm();
             SettingsFrom = new SettingsFrom();
+            if (Data.firstTimeUsing)
+            {
+                MessageBox.Show("For correctly and best working application, please do this next steps:\n" 
+                    + "1. Go in Accounts Form and add one or more desired accounts.\n"
+                    + "2. Go in Settings Form and add one or more desired income and expense categories.\n"
+                    + "If you want help, click on the help button in the Settings Form.\n");
+            }
             Application.Run(TransactionForm);
+            
         }
     }
 }
